@@ -1,0 +1,202 @@
+task:
+  type: classification
+  metrics:
+    roc_auc:
+      type: roc_auc
+      params:
+        pos_label: '1'
+    logloss:
+      type: logloss
+  preprocessor: {}
+  layer:
+    hidden:
+    - 128
+    - 64
+  criterion:
+    task_reduction: sum
+  head: {}
+events:
+  marketplace-click:
+    attributes:
+      item: null
+      brand: null
+  marketplace-clickout:
+    attributes:
+      item: null
+      brand: null
+  marketplace-like:
+    attributes:
+      item: null
+      brand: null
+  marketplace-view:
+    attributes:
+      item: null
+      brand: null
+  offers-click:
+    attributes:
+      item: null
+      brand: null
+  offers-clickout:
+    attributes:
+      item: null
+      brand: null
+  offers-like:
+    attributes:
+      item: null
+      brand: null
+  offers-view:
+    attributes:
+      item: null
+      brand: null
+  payments-transaction:
+    attributes:
+      item: null
+      brand: null
+  retail-added_to_cart:
+    attributes:
+      item: null
+      brand: null
+  retail-click:
+    attributes:
+      item: null
+      brand: null
+  retail-order:
+    attributes:
+      item: null
+      brand: null
+  retail-view:
+    attributes:
+      item: null
+      brand: null
+encoders:
+  item:
+    type: id
+    preprocessor:
+      min_count: 1
+  brand:
+    type: id
+    preprocessor:
+      min_count: 1
+  user_id:
+    type: id
+    preprocessor:
+      min_count: 1
+  region:
+    type: id
+    preprocessor:
+      min_count: 1
+  socdem_cluster:
+    type: id
+    preprocessor:
+      min_count: 1
+features:
+  item:
+    encoder: item
+    located_in:
+      context: true
+      event: true
+  brand:
+    encoder: brand
+    located_in:
+      context: true
+      event: true
+  user_id:
+    encoder: user_id
+    located_in:
+      context: true
+      event: false
+  region:
+    encoder: region
+    located_in:
+      context: true
+      event: false
+  socdem_cluster:
+    encoder: socdem_cluster
+    located_in:
+      context: true
+      event: false
+max_events_per_sequence: 512
+embedding_dim: 16
+backbone:
+  dim: 256
+  event_aggregator:
+    type: concat_linear
+    params: {}
+  context_aggregator:
+    type: tokenizer
+    params: {}
+  history_aggregator:
+    layer_order:
+    - interaction
+    - sequence_encoder
+    - nonsequence_encoder
+    interaction:
+      schedule: layered
+      type: cross_attention
+      params:
+        projection: per_token
+        reader: context
+        write: add
+        num_heads: 2
+        padding: zero
+      independent_layers: true
+    sequence_encoder:
+      type: ffn
+      params:
+        expansion_factor: 4
+        activation: relu
+        norm: layer_norm
+        norm_group: est_ffn
+        zero_padding: true
+      pool: mean
+    nonsequence_encoder:
+      type: ffn
+      params:
+        expansion_factor: 4
+        activation: relu
+        norm: layer_norm
+        norm_group: est_ffn
+      pool: flatten
+    num_layers: 3
+  readout_token: false
+training:
+  num_epochs: 1
+  seed: 42
+  event_store_backend: cached
+  tracker:
+    type: logging
+  log_every_n_train_steps: 100
+  dataloader:
+    batch_size: 1024
+    num_workers: 0
+    pin_memory: true
+    shuffle: true
+  test_dataloader:
+    batch_size: 1024
+    num_workers: 0
+    pin_memory: true
+  accumulation: 32
+  initialization:
+    linear:
+      kind: xavier_normal
+    embedding:
+      kind: normal
+      std: 0.0001
+    bias: zeros
+  gradient_clipping:
+    scope: dense
+    max_norm: 10.0
+  mixed_precision: bf16
+  optimizers:
+    default:
+      type: adamw
+      params:
+        lr: 0.0001
+        weight_decay: 0.0
+    embeddings:
+      type: adagrad
+      params:
+        lr: 0.05
+prepare:
+  allow_empty_sequences: true
+max_duration_per_sequence: null

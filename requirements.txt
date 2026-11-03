@@ -1,0 +1,11 @@
+numpy==2.4.6
+pandas==2.3.3
+polars==1.41.2
+pyarrow==24.0.0
+PyYAML==6.0.3
+torch==2.12.0
+huggingface_hub==1.20.1
+httpx==0.28.1
+scikit-learn==1.8.0
+accelerate==1.13.0
+tqdm==4.67.3

@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+reports/
+
+# Local environments and generated training outputs
+runs/
+workdir/
+*.egg-info/
+.DS_Store
+
+# Downloaded and prepared local datasets
+work/
+
+# Local data and experiment outputs
+benchmark/

@@ -1,0 +1,300 @@
+task:
+  type: classification
+  metrics:
+    roc_auc:
+      type: roc_auc
+      params:
+        pos_label: '1'
+    logloss:
+      type: logloss
+  preprocessor: {}
+  layer:
+    hidden:
+    - 128
+    - 64
+  criterion:
+    task_reduction: sum
+  head: {}
+events:
+  target-pv:
+    attributes:
+      item: null
+      brand: null
+      category: null
+  target-cart:
+    attributes:
+      item: null
+      brand: null
+      category: null
+  target-fav:
+    attributes:
+      item: null
+      brand: null
+      category: null
+  target-buy:
+    attributes:
+      item: null
+      brand: null
+      category: null
+  source-pv:
+    attributes:
+      item: null
+      brand: null
+      category: null
+  source-cart:
+    attributes:
+      item: null
+      brand: null
+      category: null
+  source-fav:
+    attributes:
+      item: null
+      brand: null
+      category: null
+  source-buy:
+    attributes:
+      item: null
+      brand: null
+      category: null
+encoders:
+  item:
+    type: id
+    preprocessor:
+      min_count: 1
+  brand:
+    type: id
+    preprocessor:
+      min_count: 1
+  category:
+    type: id
+    preprocessor:
+      min_count: 1
+  user_id:
+    type: id
+    preprocessor:
+      min_count: 1
+  cms_segid:
+    type: id
+    preprocessor:
+      min_count: 1
+  cms_group_id:
+    type: id
+    preprocessor:
+      min_count: 1
+  final_gender_code:
+    type: id
+    preprocessor:
+      min_count: 1
+  age_level:
+    type: id
+    preprocessor:
+      min_count: 1
+  pvalue_level:
+    type: id
+    preprocessor:
+      min_count: 1
+  shopping_level:
+    type: id
+    preprocessor:
+      min_count: 1
+  occupation:
+    type: id
+    preprocessor:
+      min_count: 1
+  new_user_class_level:
+    type: id
+    preprocessor:
+      min_count: 1
+  customer:
+    type: id
+    preprocessor:
+      min_count: 1
+  campaign_id:
+    type: id
+    preprocessor:
+      min_count: 1
+  price_bucket:
+    type: id
+    preprocessor:
+      min_count: 1
+  pid:
+    type: id
+    preprocessor:
+      min_count: 1
+features:
+  item:
+    encoder: item
+    located_in:
+      context: true
+      event: true
+  brand:
+    encoder: brand
+    located_in:
+      context: true
+      event: true
+  category:
+    encoder: category
+    located_in:
+      context: true
+      event: true
+  user_id:
+    encoder: user_id
+    located_in:
+      context: true
+      event: false
+  cms_segid:
+    encoder: cms_segid
+    located_in:
+      context: true
+      event: false
+  cms_group_id:
+    encoder: cms_group_id
+    located_in:
+      context: true
+      event: false
+  final_gender_code:
+    encoder: final_gender_code
+    located_in:
+      context: true
+      event: false
+  age_level:
+    encoder: age_level
+    located_in:
+      context: true
+      event: false
+  pvalue_level:
+    encoder: pvalue_level
+    located_in:
+      context: true
+      event: false
+  shopping_level:
+    encoder: shopping_level
+    located_in:
+      context: true
+      event: false
+  occupation:
+    encoder: occupation
+    located_in:
+      context: true
+      event: false
+  new_user_class_level:
+    encoder: new_user_class_level
+    located_in:
+      context: true
+      event: false
+  customer:
+    encoder: customer
+    located_in:
+      context: true
+      event: false
+  campaign_id:
+    encoder: campaign_id
+    located_in:
+      context: true
+      event: false
+  price_bucket:
+    encoder: price_bucket
+    located_in:
+      context: true
+      event: false
+  pid:
+    encoder: pid
+    located_in:
+      context: true
+      event: false
+max_events_per_sequence: 550
+embedding_dim: 16
+backbone:
+  dim: 256
+  event_aggregator:
+    type: concat_linear
+    params: {}
+  context_aggregator:
+    type: tokenizer
+    params:
+      num_tokens: 4
+  history_aggregator:
+    layer_order:
+    - sequence_encoder
+    - interaction
+    - nonsequence_encoder
+    sequence_encoder:
+      type: self_attention
+      params:
+        num_heads: 2
+        ffn:
+          expansion_factor: 2
+          activation: relu
+          norm: none
+        zero_padding: true
+        mask_padding: false
+    nonsequence_encoder:
+      type: stack
+      params:
+        blocks:
+        - type: token_mixing
+          params:
+            kernel: permutation
+        - type: per_token_ffn
+          params:
+            expansion_factor: 2
+            activation: gelu
+        queries:
+          type: persistent
+          params:
+            num_tokens: 2
+    interaction:
+      schedule: layered
+      type: cross_attention
+      params:
+        reader: queries
+        num_tokens: 2
+        projection: shared
+        num_heads: 2
+        write: replace
+        padding: zero
+      pool: mean
+      independent_layers: true
+    num_layers: 3
+  readout_token: false
+training:
+  num_epochs: 1
+  seed: 42
+  event_store_backend: cached
+  tracker:
+    type: logging
+  log_every_n_train_steps: 100
+  dataloader:
+    batch_size: 512
+    num_workers: 0
+    pin_memory: true
+    shuffle: true
+  test_dataloader:
+    batch_size: 512
+    num_workers: 0
+    pin_memory: true
+  accumulation: 4
+  initialization:
+    linear:
+      kind: xavier_normal
+    embedding:
+      kind: normal
+      std: 0.0001
+    bias: zeros
+  gradient_clipping:
+    scope: dense
+    max_norm: 10.0
+  mixed_precision: bf16
+  optimizers:
+    default:
+      type: adamw
+      params:
+        lr: 0.0001
+        weight_decay: 0.0
+    embeddings:
+      type: adagrad
+      params:
+        lr: 0.05
+prepare:
+  allow_empty_sequences: true
+max_duration_per_sequence: null

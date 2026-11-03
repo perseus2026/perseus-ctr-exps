@@ -1,0 +1,707 @@
+task:
+  type: classification
+  metrics:
+    roc_auc:
+      type: roc_auc
+      params:
+        pos_label: '1'
+    logloss:
+      type: logloss
+  preprocessor: {}
+  layer:
+    hidden:
+    - 128
+    - 64
+  criterion:
+    task_reduction: sum
+  head: {}
+events:
+  Cart:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Cart|Checkout:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Cart|Checkout|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Cart|Offer:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Cart|Offer|Checkout:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Cart|Offer|Checkout|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Cart|Offer|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Cart|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Checkout:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Checkout|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Cart:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Cart|Checkout:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Cart|Checkout|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Cart|Offer:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Cart|Offer|Checkout:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Cart|Offer|Checkout|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Cart|Offer|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Cart|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Checkout:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Checkout|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Offer:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Offer|Checkout:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Offer|Checkout|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Offer|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Like|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Offer:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Offer|Checkout:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Offer|Checkout|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Offer|Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  Purchase:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+  exposure:
+    attributes:
+      item: null
+      product_id: null
+      price_bucket: null
+      c0_id: null
+      c1_id: null
+      c2_id: null
+      brand_id: null
+      item_condition_id: null
+      size_id: null
+      shipper_id: null
+      color: null
+encoders:
+  item:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  product_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  price_bucket:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  c0_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  c1_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  c2_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  brand_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  item_condition_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  size_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  shipper_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  color:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  session_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  day_of_week:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  is_weekend:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  hour:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  user_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  candidate_action:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+features:
+  item:
+    located_in:
+      event: true
+      context: true
+    encoder: item
+  product_id:
+    located_in:
+      event: true
+      context: true
+    encoder: product_id
+  price_bucket:
+    located_in:
+      event: true
+      context: true
+    encoder: price_bucket
+  c0_id:
+    located_in:
+      event: true
+      context: true
+    encoder: c0_id
+  c1_id:
+    located_in:
+      event: true
+      context: true
+    encoder: c1_id
+  c2_id:
+    located_in:
+      event: true
+      context: true
+    encoder: c2_id
+  brand_id:
+    located_in:
+      event: true
+      context: true
+    encoder: brand_id
+  item_condition_id:
+    located_in:
+      event: true
+      context: true
+    encoder: item_condition_id
+  size_id:
+    located_in:
+      event: true
+      context: true
+    encoder: size_id
+  shipper_id:
+    located_in:
+      event: true
+      context: true
+    encoder: shipper_id
+  color:
+    located_in:
+      event: true
+      context: true
+    encoder: color
+  session_id:
+    located_in:
+      context: true
+    encoder: session_id
+  day_of_week:
+    located_in:
+      context: true
+    encoder: day_of_week
+  is_weekend:
+    located_in:
+      context: true
+    encoder: is_weekend
+  hour:
+    located_in:
+      context: true
+    encoder: hour
+  user_id:
+    located_in:
+      context: true
+    encoder: user_id
+  candidate_action:
+    located_in:
+      context: true
+    encoder: candidate_action
+max_events_per_sequence: 100
+embedding_dim: 16
+backbone:
+  dim: 256
+  event_aggregator:
+    type: sum
+    params: {}
+  context_aggregator:
+    type: identity
+    params: {}
+  history_aggregator:
+    sequence_encoder:
+      type: identity
+      params: {}
+    nonsequence_encoder:
+      type: stack
+      params:
+        num_layers: 3
+        blocks:
+        - type: low_rank_attention
+          params:
+            num_heads: 2
+            qkv_rank: 256
+        - type: per_token_ffn
+          params:
+            expansion_factor: 2
+            activation: gelu
+    interaction:
+      schedule: once
+      type: target_attention
+      params:
+        tokenize:
+          type: field_task
+          params:
+            num_tasks: 5
+        query_context_fields:
+        - item
+        - product_id
+        - price_bucket
+        - c0_id
+        - c1_id
+        - c2_id
+        - brand_id
+        - item_condition_id
+        - size_id
+        - shipper_id
+        - color
+      pool:
+        select: 5
+  readout_token: false
+training:
+  num_epochs: 1
+  seed: 42
+  event_store_backend: cached
+  tracker:
+    type: logging
+  log_every_n_train_steps: 100
+  dataloader:
+    batch_size: 2048
+    num_workers: 4
+    pin_memory: true
+    shuffle: true
+  test_dataloader:
+    batch_size: 2048
+    num_workers: 4
+    pin_memory: true
+  accumulation: 16
+  initialization:
+    linear:
+      kind: xavier_normal
+    embedding:
+      kind: normal
+      std: 0.0001
+    bias: zeros
+  gradient_clipping:
+    scope: dense
+    max_norm: 10.0
+  mixed_precision: bf16
+  optimizers:
+    default:
+      type: adamw
+      params:
+        lr: 0.0001
+        weight_decay: 0.0
+    embeddings:
+      type: adagrad
+      params:
+        lr: 0.05
+prepare:
+  allow_empty_sequences: true

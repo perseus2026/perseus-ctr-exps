@@ -1,0 +1,17 @@
+target_prefix: retail-
+identity_fields:
+- item
+- brand
+history: cross
+batch_size: 1024
+accumulation: 32
+epochs: 1
+workers: 0
+seed: 42
+crp_weight: 0.01
+no_validation: true
+history_limit: 512
+model_mode: source_lap
+fallback_to_target: true
+compact_samples: true
+expected_tecd_counts: true

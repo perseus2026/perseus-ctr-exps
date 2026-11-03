@@ -1,0 +1,15 @@
+target_prefix: target-
+identity_fields:
+- category
+- brand
+history: cross
+target_budget: 50
+source_budget: 500
+batch_size: 2048
+accumulation: 1
+epochs: 1
+workers: 2
+seed: 42
+crp_weight: 0.01
+no_validation: true
+model_mode: source_lap

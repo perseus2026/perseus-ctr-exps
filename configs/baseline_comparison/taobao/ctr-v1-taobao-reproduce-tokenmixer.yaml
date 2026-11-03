@@ -1,0 +1,429 @@
+task:
+  type: classification
+  metrics:
+    roc_auc:
+      type: roc_auc
+      params:
+        pos_label: '1'
+    logloss:
+      type: logloss
+  preprocessor: {}
+  layer:
+    hidden:
+    - 128
+    - 64
+  criterion:
+    task_reduction: sum
+  head: {}
+events:
+  buy:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  cart:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  cart|buy:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  cart|fav:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  cart|fav|buy:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  exposure:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  fav:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  fav|buy:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  is_click:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  is_click|buy:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  is_click|cart:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  is_click|cart|buy:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  is_click|cart|fav:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  is_click|cart|fav|buy:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  is_click|fav:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+  is_click|fav|buy:
+    attributes:
+      item: null
+      cate_id: null
+      campaign_id: null
+      customer_id: null
+      brand: null
+      price_bucket: null
+encoders:
+  item:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  cate_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  campaign_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  customer_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  brand:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  price_bucket:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  cms_segid:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  cms_group_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  final_gender_code:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  age_level:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  pvalue_level:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  shopping_level:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  occupation:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  new_user_class_level:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  pid:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  is_weekend:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  hour:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  user_id:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+  candidate_action:
+    type: id
+    preprocessor:
+      min_count: 1
+    embedder:
+      prepared: true
+features:
+  item:
+    located_in:
+      event: true
+      context: true
+    encoder: item
+  cate_id:
+    located_in:
+      event: true
+      context: true
+    encoder: cate_id
+  campaign_id:
+    located_in:
+      event: true
+      context: true
+    encoder: campaign_id
+  customer_id:
+    located_in:
+      event: true
+      context: true
+    encoder: customer_id
+  brand:
+    located_in:
+      event: true
+      context: true
+    encoder: brand
+  price_bucket:
+    located_in:
+      event: true
+      context: true
+    encoder: price_bucket
+  cms_segid:
+    located_in:
+      context: true
+    encoder: cms_segid
+  cms_group_id:
+    located_in:
+      context: true
+    encoder: cms_group_id
+  final_gender_code:
+    located_in:
+      context: true
+    encoder: final_gender_code
+  age_level:
+    located_in:
+      context: true
+    encoder: age_level
+  pvalue_level:
+    located_in:
+      context: true
+    encoder: pvalue_level
+  shopping_level:
+    located_in:
+      context: true
+    encoder: shopping_level
+  occupation:
+    located_in:
+      context: true
+    encoder: occupation
+  new_user_class_level:
+    located_in:
+      context: true
+    encoder: new_user_class_level
+  pid:
+    located_in:
+      context: true
+    encoder: pid
+  is_weekend:
+    located_in:
+      context: true
+    encoder: is_weekend
+  hour:
+    located_in:
+      context: true
+    encoder: hour
+  user_id:
+    located_in:
+      context: true
+    encoder: user_id
+  candidate_action:
+    located_in:
+      context: true
+    encoder: candidate_action
+max_events_per_sequence: 100
+embedding_dim: 16
+backbone:
+  dim: 256
+  event_aggregator:
+    type: sum
+    params: {}
+  context_aggregator:
+    type: identity
+    params: {}
+  history_aggregator:
+    sequence_encoder:
+      type: identity
+      params: {}
+    nonsequence_encoder:
+      type: stack
+      params:
+        num_layers: 3
+        blocks:
+        - type: token_mixing
+          params:
+            kernel: permutation
+            reversible: true
+            expansion_factor: 2
+        - type: per_token_ffn
+          params:
+            expansion_factor: 2
+            activation: swiglu
+    interaction:
+      schedule: once
+      type: target_attention
+      params:
+        tokenize:
+          type: global_group
+          params:
+            num_group_tokens: 4
+        query_context_fields:
+        - item
+        - cate_id
+        - campaign_id
+        - customer_id
+        - brand
+        - price_bucket
+      pool: mean
+  readout_token: false
+training:
+  num_epochs: 1
+  seed: 42
+  event_store_backend: cached
+  tracker:
+    type: logging
+  log_every_n_train_steps: 100
+  dataloader:
+    batch_size: 2048
+    num_workers: 4
+    pin_memory: true
+    shuffle: true
+  test_dataloader:
+    batch_size: 2048
+    num_workers: 4
+    pin_memory: true
+  accumulation: 16
+  initialization:
+    linear:
+      kind: xavier_normal
+    embedding:
+      kind: normal
+      std: 0.0001
+    bias: zeros
+  gradient_clipping:
+    scope: dense
+    max_norm: 10.0
+  mixed_precision: bf16
+  optimizers:
+    default:
+      type: adamw
+      params:
+        lr: 0.0001
+        weight_decay: 0.0
+    embeddings:
+      type: adagrad
+      params:
+        lr: 0.05
+prepare:
+  allow_empty_sequences: true
